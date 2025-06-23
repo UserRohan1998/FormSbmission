@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const sql = require('mssql');
 const path = require('path');
-// const port = 8000;
+const port = 3306;
 
 const app = express();
 
@@ -27,8 +27,8 @@ const config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     server: process.env.DB_SERVER,
-    // database: process.env.DB_DATABASE,
-    // port: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
     options: {
         encrypt: true,
         trustServerCertificate: true
