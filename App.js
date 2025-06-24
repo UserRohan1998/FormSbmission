@@ -39,6 +39,7 @@ async function connectToMySQL() {
 
 connectToMySQL();
 
+const sanitize = (value) => (value === undefined || value === '' ? null : value);
 // Routes
 app.get('/', (req, res) => {
     res.render('home'); // assumes views/home.ejs exists
@@ -79,26 +80,27 @@ app.post('/submit-verification', async (req, res) => {
         `;
 
         const values = [
-            requesting_company_name,
-            your_name,
-            your_title,
-            your_email,
-            request_date,
-            employee_full_name,
-            employee_dob,
-            employee_position_applied,
-            previous_company_name,
-            previous_company_contact,
-            previous_company_address,
-            employment_start_date,
-            employment_end_date,
-            position_held,
-            salary_at_departure,
-            reason_for_leaving,
-            eligible_for_rehire,
-            performance_comments,
-            additional_comments
+            sanitize(requesting_company_name),
+            sanitize(your_name),
+            sanitize(your_title),
+            sanitize(your_email),
+            sanitize(request_date),
+            sanitize(employee_full_name),
+            sanitize(employee_dob),
+            sanitize(employee_position_applied),
+            sanitize(previous_company_name),
+            sanitize(previous_company_contact),
+            sanitize(previous_company_address),
+            sanitize(employment_start_date),
+            sanitize(employment_end_date),
+            sanitize(position_held),
+            sanitize(salary_at_departure),
+            sanitize(reason_for_leaving),
+            sanitize(eligible_for_rehire),
+            sanitize(performance_comments),
+            sanitize(additional_comments)
         ];
+
 
         const [result] = await pool.execute(insertQuery, values);
         console.log('✅ Verification inserted:', result.insertId);
