@@ -1,58 +1,50 @@
-// STEP 1: Load environment variables
 require('dotenv').config();
-
 const express = require('express');
 const mysql = require('mysql2/promise');
 const path = require('path');
+const { URL } = require('url');
 
 const app = express();
-const port = 3000; // This should probably be 3000 unless you're exposing MySQL via your app (not recommended)
+const port = process.env.PORT || 3000;
 
-// Setup view engine
+// Setup EJS views
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Middleware for parsing data
+// Middleware for form and JSON data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MySQL config
-const config = {
-    host: process.env.DB_HOST, // was DB_SERVER incorrectly
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    port: Number(process.env.DB_PORT) || 3306
-};
+// ✅ Parse DATABASE_URL (from Railway or .env)
+const dbUrl = new URL(process.env.DATABASE_URL); // Set this in Railway
 
-// Connect to DB once (optional pooling can be added later)
-let pool;
+const pool = mysql.createPool({
+    host: dbUrl.hostname,
+    user: dbUrl.username,
+    password: dbUrl.password,
+    database: dbUrl.pathname.replace('/', ''),
+    port: dbUrl.port || 3306
+});
 
+// Connect and confirm MySQL connection
 async function connectToMySQL() {
     try {
-        pool = await mysql.createPool(config);
+        const connection = await pool.getConnection();
         console.log('✅ Connected to MySQL database!');
+        await connection.release();
     } catch (err) {
-        console.error('❌ Failed to connect to MySQL:', err.message);
+        console.error('❌ Error connecting to MySQL:', err.message);
     }
 }
-
-// Start the server
-app.listen(3000, () => {
-    console.log('🚀 Server is running on port 3000');
-});
 
 connectToMySQL();
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home'); // assumes views/home.ejs exists
 });
 
 app.post('/submit-verification', async (req, res) => {
-    console.log('--- Inside /submit-verification POST handler ---');
-    console.log('Raw req.body:', req.body);
-
     try {
         const {
             requesting_company_name,
@@ -109,11 +101,15 @@ app.post('/submit-verification', async (req, res) => {
         ];
 
         const [result] = await pool.execute(insertQuery, values);
+        console.log('✅ Verification inserted:', result.insertId);
+        res.render('success'); // assumes views/success.ejs exists
 
-        console.log('✅ Verification saved successfully!', result);
-        res.render('success');
     } catch (error) {
         console.error('❌ Error saving verification:', error);
-        res.status(500).render('error', { errorMessage: error.message });
+        res.status(500).render('error', { errorMessage: error.message }); // assumes views/error.ejs exists
     }
+});
+
+app.listen(port, () => {
+    console.log(`🚀 Server is running on port ${port}`);
 });
