@@ -75,8 +75,8 @@ app.post('/submit-verification', async (req, res) => {
                 EmployeeFullName, EmployeeDOB, EmployeePositionApplied,
                 PreviousCompanyName, PreviousCompanyContact, PreviousCompanyAddress,
                 EmploymentStartDate, EmploymentEndDate, PositionHeld, SalaryAtDeparture,
-                ReasonForLeaving, EligibleForRehire, PerformanceComments, AdditionalComments
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ReasonForLeaving, EligibleForRehire, PerformanceComments, AdditionalComments,CreatedAt
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         const values = [
@@ -98,7 +98,8 @@ app.post('/submit-verification', async (req, res) => {
             sanitize(reason_for_leaving),
             sanitize(eligible_for_rehire),
             sanitize(performance_comments),
-            sanitize(additional_comments)
+            sanitize(additional_comments),
+            currentTimestamp//current time of submissions
         ];
 
 
