@@ -70,7 +70,7 @@ app.post('/submit-verification', async (req, res) => {
         } = req.body;
 
         const insertQuery = `
-            INSERT INTO Employee (
+            INSERT INTO Employee_Verify (
                 RequestingCompanyName, YourName, YourTitle, YourEmail, RequestDate,
                 EmployeeFullName, EmployeeDOB, EmployeePositionApplied,
                 PreviousCompanyName, PreviousCompanyContact, PreviousCompanyAddress,
