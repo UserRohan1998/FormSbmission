@@ -114,7 +114,7 @@ app.post('/submit-verification', async (req, res) => {
 
 app.get('/submissions', async (req, res) => {
     try {
-        const [rows] = await pool.execute('SELECT * FROM Verifications');
+        const [rows] = await pool.execute('SELECT * FROM Employee_Verify');
         res.render('submissions', { data: rows }); // views/submissions.ejs
     } catch (error) {
         console.error('❌ Error fetching submissions:', error);
