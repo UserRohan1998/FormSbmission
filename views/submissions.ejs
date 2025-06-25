@@ -1,40 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>All Submissions</title>
     <style>
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 20px; }
+        table { border-collapse: collapse; width: 100%; font-size: 14px; }
+        th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
+        th { background-color: #f4f4f4; }
+        tr:nth-child(even) { background-color: #fafafa; }
+        td { word-wrap: break-word; max-width: 250px; }
     </style>
 </head>
 <body>
-    <h1>All Verifications</h1>
-    <table>
-        <thead>
+
+<h1>All Verifications</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Requesting Company</th>
+            <th>Your Name</th>
+            <th>Your Title</th>
+            <th>Your Email</th>
+            <th>Request Date</th>
+            <th>Employee Name</th>
+            <th>DOB</th>
+            <th>Position Applied</th>
+            <th>Previous Company</th>
+            <th>Prev. Contact</th>
+            <th>Prev. Address</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Position Held</th>
+            <th>Salary</th>
+            <th>Reason for Leaving</th>
+            <th>Eligible for Rehire</th>
+            <th>Performance Comments</th>
+            <th>Additional Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach(row => { %>
             <tr>
-                <th>ID</th>
-                <th>Company</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Employee</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <td><%= row.id %></td>
+                <td><%= row.RequestingCompanyName %></td>
+                <td><%= row.YourName %></td>
+                <td><%= row.YourTitle %></td>
+                <td><%= row.YourEmail %></td>
+                <td><%= row.RequestDate?.toISOString().slice(0, 10) %></td>
+                <td><%= row.EmployeeFullName %></td>
+                <td><%= row.EmployeeDOB?.toISOString().slice(0, 10) %></td>
+                <td><%= row.EmployeePositionApplied %></td>
+                <td><%= row.PreviousCompanyName %></td>
+                <td><%= row.PreviousCompanyContact %></td>
+                <td><%= row.PreviousCompanyAddress %></td>
+                <td><%= row.EmploymentStartDate?.toISOString().slice(0, 10) %></td>
+                <td><%= row.EmploymentEndDate?.toISOString().slice(0, 10) %></td>
+                <td><%= row.PositionHeld %></td>
+                <td><%= row.SalaryAtDeparture %></td>
+                <td><%= row.ReasonForLeaving %></td>
+                <td><%= row.EligibleForRehire %></td>
+                <td><%= row.PerformanceComments %></td>
+                <td><%= row.AdditionalComments %></td>
             </tr>
-        </thead>
-        <tbody>
-            <% data.forEach(row => { %>
-                <tr>
-                    <td><%= row.id %></td>
-                    <td><%= row.RequestingCompanyName %></td>
-                    <td><%= row.YourName %></td>
-                    <td><%= row.YourEmail %></td>
-                    <td><%= row.EmployeeFullName %></td>
-                    <td><%= row.EmploymentStartDate %></td>
-                    <td><%= row.EmploymentEndDate %></td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
+        <% }) %>
+    </tbody>
+</table>
+
 </body>
 </html>
