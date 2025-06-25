@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Submissions</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>All Verifications</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Employee</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(row => { %>
+                <tr>
+                    <td><%= row.id %></td>
+                    <td><%= row.RequestingCompanyName %></td>
+                    <td><%= row.YourName %></td>
+                    <td><%= row.YourEmail %></td>
+                    <td><%= row.EmployeeFullName %></td>
+                    <td><%= row.EmploymentStartDate %></td>
+                    <td><%= row.EmploymentEndDate %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

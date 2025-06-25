@@ -112,6 +112,17 @@ app.post('/submit-verification', async (req, res) => {
     }
 });
 
+app.get('/submissions', async (req, res) => {
+    try {
+        const [rows] = await pool.execute('SELECT * FROM Verifications');
+        res.render('submissions', { data: rows }); // views/submissions.ejs
+    } catch (error) {
+        console.error('❌ Error fetching submissions:', error);
+        res.status(500).render('error', { errorMessage: error.message });
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`🚀 Server is running on port ${port}`);
 });
