@@ -7,6 +7,7 @@ const { URL } = require('url');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 // Setup EJS views
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -113,11 +114,34 @@ app.post('/submit-verification', async (req, res) => {
 });
 
 app.get('/submissions', async (req, res) => {
+    const search = req.query.search || '';
     try {
-        const [rows] = await pool.execute('SELECT * FROM Employee_Verify');
-        res.render('submissions', { data: rows }); // views/submissions.ejs
+        const [rows] = await pool.execute(
+  `SELECT id, RequestingCompanyName, YourName, YourTitle, YourEmail, RequestDate,
+          EmployeeFullName, EmployeeDOB, EmployeePositionApplied,
+          PreviousCompanyName, PreviousCompanyContact, PreviousCompanyAddress,
+          EmploymentStartDate, EmploymentEndDate, PositionHeld, SalaryAtDeparture,
+          ReasonForLeaving, EligibleForRehire, PerformanceComments, AdditionalComments
+   FROM Verifications
+   WHERE EmployeeFullName LIKE ? 
+   OR RequestingCompanyName LIKE ?
+   ORDER BY id DESC`,
+  [`%${search}%`, `%${search}%`]
+);
+
+        res.render('submissions', { data: rows, search }); // views/submissions.ejs
     } catch (error) {
         console.error('❌ Error fetching submissions:', error);
+        res.status(500).render('error', { errorMessage: error.message });
+    }
+});
+
+app.post('/delete/:id', async (req, res) => {
+    try {
+        await pool.execute('DELETE FROM Verifications WHERE id = ?', [req.params.id]);
+        res.redirect('/submissions');
+    } catch (error) {
+        console.error('❌ Error deleting submission:', error);
         res.status(500).render('error', { errorMessage: error.message });
     }
 });
