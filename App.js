@@ -122,7 +122,7 @@ app.get('/submissions', async (req, res) => {
           PreviousCompanyName, PreviousCompanyContact, PreviousCompanyAddress,
           EmploymentStartDate, EmploymentEndDate, PositionHeld, SalaryAtDeparture,
           ReasonForLeaving, EligibleForRehire, PerformanceComments, AdditionalComments
-   FROM Verifications
+   FROM Employee_Verify
    WHERE EmployeeFullName LIKE ? 
    OR RequestingCompanyName LIKE ?
    ORDER BY id DESC`,
@@ -138,7 +138,7 @@ app.get('/submissions', async (req, res) => {
 
 app.post('/delete/:id', async (req, res) => {
     try {
-        await pool.execute('DELETE FROM Verifications WHERE id = ?', [req.params.id]);
+        await pool.execute('DELETE FROM Employee_Verify WHERE id = ?', [req.params.id]);
         res.redirect('/submissions');
     } catch (error) {
         console.error('❌ Error deleting submission:', error);
