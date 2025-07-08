@@ -3,145 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Verification Form</title>
+  <title>Employment Verification Form</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+    body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
   <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-4xl w-full">
-    <h1 class="text-3xl font-bold text-center text-teal-600 mb-10">Employee Verification Form</h1>
+    <h1 class="text-3xl font-bold text-center text-teal-600 mb-10">Employment Verification Form</h1>
 
-    <form action="/submit-verification" method="POST" class="space-y-12">
-      
-      <!-- Requesting Company Info -->
+    <form action="/submit-verification" method="POST" class="space-y-8">
+
+      <!-- Employee Details -->
       <section>
-        <h2 class="text-xl font-semibold text-teal-600 border-b-2 border-gray-200 pb-2 mb-6">Requesting Company Information</h2>
+        <h2 class="text-xl font-semibold text-teal-600 mb-4">Employee Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Your Company Name</label>
-            <input type="text" name="requesting_company_name" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., XYZ Inc." required />
+            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+            <input type="text" name="employee_full_name" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-            <input type="text" name="your_name" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., Jane/John Doe" required />
+            <label class="block text-sm font-medium text-gray-700">Designation</label>
+            <input type="text" name="designation" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Your Title</label>
-            <input type="text" name="your_title" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., HR Manager" required />
+            <label class="block text-sm font-medium text-gray-700">Employment Start Date</label>
+            <input type="date" name="employment_start_date" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
-            <input type="email" name="your_email" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., john/jane.doe@example.com" required />
+            <label class="block text-sm font-medium text-gray-700">Employment End Date</label>
+            <input type="date" name="employment_end_date" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Request Date</label>
-            <input type="date" name="request_date" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required />
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Last Working Day</label>
+            <input type="date" name="last_working_day" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Last Drawn CTC</label>
+            <input type="text" name="last_drawn_ctc" placeholder="e.g., ₹10 LPA" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Take Home Salary</label>
+            <input type="text" name="take_home_salary" placeholder="e.g., ₹65,000/month" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
         </div>
       </section>
 
-      <!-- Former Employee Info -->
+      <!-- Performance & Conduct -->
       <section>
-        <h2 class="text-xl font-semibold text-teal-600 border-b-2 border-gray-200 pb-2 mb-6">Former Employee Information</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h2 class="text-xl font-semibold text-teal-600 mb-4">Performance & Conduct</h2>
+        <div class="grid grid-cols-1 gap-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Employee Full Name</label>
-            <input type="text" name="employee_full_name" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., John/Jane Doe" required />
+            <label class="block text-sm font-medium text-gray-700">Overall Performance</label>
+            <input type="text" name="overall_performance" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Employee Date of Birth (Optional)</label>
-            <input type="date" name="employee_dob" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" />
+            <label class="block text-sm font-medium text-gray-700">Work Ethic & Punctuality</label>
+            <input type="text" name="work_ethic_and_punctuality" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Position Applied For</label>
-            <input type="text" name="employee_position_applied" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., xyz" />
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Team Collaboration</label>
+            <input type="text" name="team_collaboration" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Client Handling</label>
+            <input type="text" name="client_handling" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Workplace Behavior</label>
+            <input type="text" name="workplace_behavior" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Disciplinary Actions (if any)</label>
+            <input type="text" name="disciplinary_actions" placeholder="e.g., None" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
         </div>
       </section>
 
-      <!-- Previous Company Info -->
+      <!-- Exit & Rehire Info -->
       <section>
-        <h2 class="text-xl font-semibold text-teal-600 border-b-2 border-gray-200 pb-2 mb-6">Previous Company Information</h2>
+        <h2 class="text-xl font-semibold text-teal-600 mb-4">Exit & Rehire Status</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Previous Company Name</label>
-            <input type="text" name="previous_company_name" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., XYZ Co." required />
+            <label class="block text-sm font-medium text-gray-700">Reason for Leaving</label>
+            <input type="text" name="reason_for_leaving" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Contact Person/Department (Optional)</label>
-            <input type="text" name="previous_company_contact" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., HR Dept" />
-          </div>
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Company Address (Optional)</label>
-            <input type="text" name="previous_company_address" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., 123 Street, Main lane" />
-          </div>
-        </div>
-      </section>
-
-      <!-- Verification Questions -->
-      <section>
-        <h2 class="text-xl font-semibold text-teal-600 border-b-2 border-gray-200 pb-2 mb-6">Verification Questions</h2>
-        <div class="space-y-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Employment Start Date</label>
-            <input type="date" name="employment_start_date" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Employment End Date</label>
-            <input type="date" name="employment_end_date" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Position(s) Held</label>
-            <input type="text" name="position_held" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Salary at Departure (Optional)</label>
-            <input type="text" name="salary_at_departure" placeholder="e.g., 50,000" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Leaving</label>
-            <select name="reason_for_leaving" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500">
+            <label class="block text-sm font-medium text-gray-700">Was the Candidate on PIP?</label>
+            <select name="was_on_pip" required class="w-full border border-gray-300 rounded-md px-4 py-2">
               <option value="">Select</option>
-              <option value="voluntary">Voluntary Resignation</option>
-              <option value="involuntary">Involuntary Termination</option>
-              <option value="layoff">Layoff</option>
-              <option value="other">Other</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Eligible for Rehire?</label>
-            <div class="flex space-x-6 mt-2">
-              <label class="inline-flex items-center">
-                <input type="radio" name="eligible_for_rehire" value="yes" class="text-teal-600" />
-                <span class="ml-2 text-gray-700">Yes</span>
-              </label>
-              <label class="inline-flex items-center">
-                <input type="radio" name="eligible_for_rehire" value="no" class="text-teal-600" />
-                <span class="ml-2 text-gray-700">No</span>
-              </label>
-              <label class="inline-flex items-center">
-                <input type="radio" name="eligible_for_rehire" value="unknown" class="text-teal-600" />
-                <span class="ml-2 text-gray-700">Unknown</span>
-              </label>
-            </div>
+            <label class="block text-sm font-medium text-gray-700">Exit Status</label>
+            <input type="text" name="exit_status" placeholder="e.g., All formalities completed" required class="w-full border border-gray-300 rounded-md px-4 py-2" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Performance & Duties</label>
-            <textarea name="performance_comments" placeholder="e.g., John/Jane was..." class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 min-h-[100px] resize-y"></textarea>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Additional Comments</label>
-            <textarea name="additional_comments" placeholder="e.g., Feel free to reach out..." class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 min-h-[100px] resize-y"></textarea>
+            <label class="block text-sm font-medium text-gray-700">Eligible for Rehire?</label>
+            <select name="eligible_for_rehire" required class="w-full border border-gray-300 rounded-md px-4 py-2">
+              <option value="">Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
           </div>
         </div>
       </section>
 
-      <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 rounded-md shadow-lg transition duration-200">Submit Verification</button>
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold shadow-md">
+          Submit Verification
+        </button>
+      </div>
     </form>
   </div>
 </body>
