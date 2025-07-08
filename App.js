@@ -70,7 +70,7 @@ app.post('/submit-verification', async (req, res) => {
         } = req.body;
 
         const insertQuery = `
-            INSERT INTO Employee_Verify (
+            INSERT INTO Test_Employee_Verify (
                 EmployeeFullName, Designation, EmploymentStartDate, EmploymentEndDate, LastWorkingDay,
                 LastDrawnCTC, TakeHomeSalary,
                 OverallPerformance, WorkEthicAndPunctuality, TeamCollaboration,
@@ -118,7 +118,7 @@ app.get('/submissions', async (req, res) => {
                     OverallPerformance, WorkEthicAndPunctuality, TeamCollaboration,
                     ClientHandling, WorkplaceBehavior, DisciplinaryActions,
                     ReasonForLeaving, WasOnPIP, ExitStatus, EligibleForRehire
-             FROM Employee_Verify
+             FROM Test_Employee_Verify
              WHERE EmployeeFullName LIKE ?
              ORDER BY id DESC`,
             [`%${search}%`]
@@ -134,7 +134,7 @@ app.get('/submissions', async (req, res) => {
 // POST: Delete Submission
 app.post('/delete/:id', async (req, res) => {
     try {
-        await pool.execute('DELETE FROM Employee_Verify WHERE id = ?', [req.params.id]);
+        await pool.execute('DELETE FROM Test_Employee_Verify WHERE id = ?', [req.params.id]);
         res.redirect('/submissions');
     } catch (error) {
         console.error('❌ Error deleting submission:', error);
